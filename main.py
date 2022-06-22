@@ -37,8 +37,8 @@ async def get_instagram_details(instagram_username: str) -> dict:
     user = InstagramUser(instagram_username, sessionid=session_id, from_cache=True)
     return {
         "username": user.username,
-        "name": ascii(unicodedata.normalize("NFKD", user.fullname)).replace("\'", ""),
-        "description": ascii(unicodedata.normalize("NFKD", user.biography)).replace("\'", ""),
+        "name": unicodedata.normalize("NFKD", user.fullname).replace("\'", ""),
+        "description": unicodedata.normalize("NFKD", user.biography).replace("\'", ""),
         "profile_pic": user.profile_picture_url,
         "pictures": user.posts_display_urls,
         }
@@ -53,7 +53,7 @@ def print_result(data: dict):
     create_output_dir()
     username = data["username"]
     output_file_path = os.path.join(current_work_dir, "outputs", f"output_{username}.txt")
-    with open(output_file_path, "w") as f:
+    with open(output_file_path, "w", encoding="utf_8") as f:
         f.write(str(data).replace('\'', '\"'))
     print(f"Success write output to: \"outputs/outputs_{username}.txt\"")
 
