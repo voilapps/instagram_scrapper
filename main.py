@@ -22,8 +22,9 @@ def get_input_session():
 
 def get_target_username() -> str:
     while True:
-        instagram_username = input("Input target instagram username: ")
-        if len(instagram_username.strip()) != 0:
+        user_input = input("Input target instagram username: ")
+        instagram_username = user_input.strip().lower()
+        if len(instagram_username) != 0:
             return instagram_username
         print("Username cannot be empty")
 
@@ -60,7 +61,7 @@ def print_result(data: dict):
 
 def get_next_query_confirmation() -> bool:
     while True:
-        user_input = input("Get next username? (y/n)")
+        user_input = input("Get next username? (y/n): ")
         if user_input == "Y" or user_input == "y":
             return True
         if user_input == "N" or user_input == "n":
